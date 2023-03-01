@@ -16,7 +16,9 @@ export class RatingService implements Service {
 		productId,
 		purchaseDate,
 	}: RatingDto): Promise<Rating> => {
-		const rating = await this.repository.findOne({ where: { authorId, productId } });
+		const rating = await this.repository.findOne({
+			where: { authorId, productId },
+		});
 		if (rating)
 			throw new HttpException({
 				statusCode: HttpStatusCode.CONFLICT,
@@ -33,6 +35,21 @@ export class RatingService implements Service {
 		});
 
 		return this.repository.save(newRating);
+	};
+
+	update = async (
+		id: number,
+		updateRating: UpdateRatingDto
+	): Promise<Rating> => {
+		const rating = await this.findOne(id);
+
+		Object.assign(rating, {
+			date: new Date(),
+			comment: updateRating.comment !== undefined ? updateRating.comment : '',
+			ratingScale: updateRating.ratingScale,
+		});
+
+		return this.repository.save(rating);
 	};
 
 	findOne = async (id: number): Promise<Rating> => {
@@ -56,13 +73,4 @@ export class RatingService implements Service {
 
 		return rating;
 	};
-
-	update = async (
-		id: number,
-		updateRating: UpdateRatingDto
-	): Promise<Rating> => {
-		const rating = await this.findOne(id);
-
-		Object.assign(rating, updateRating);
-		return this.repository.save(rating);
 }

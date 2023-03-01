@@ -14,20 +14,4 @@ export class UpdateRatingDto {
 	@IsOptional()
 	@IsString()
 	comment: string;
-
-	@IsNotEmpty()
-	@IsISO8601()
-	date: Date;
-
-	@IsNotEmpty()
-	@IsNumber()
-	authorId: number;
-
-	@IsNotEmpty()
-	@IsNumber()
-	productId: number;
-
-	@IsNotEmpty()
-	@IsISO8601()
-	purchaseDate: Date;
 }

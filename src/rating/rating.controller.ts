@@ -65,11 +65,11 @@ export class RatingController {
 	update = async (req: Request, res: Response, next: NextFunction) => {
 		try {
 			const {
-				body,
+				body: { ratingScale, comment },
 				params: { id },
 			} = req;
 
-			const response = await this.service.update(+id, body);
+			const response = await this.service.update(+id, { ratingScale, comment });
 
 			return res.status(HttpStatusCode.OK).send({
 				statusCode: HttpStatusCode.OK,
