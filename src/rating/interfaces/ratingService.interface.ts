@@ -1,4 +1,4 @@
-import { RatingDto } from '@rating/dtos/rating.dtos';
+import { RatingDto } from '@src/rating/dtos/rating.dto';
 import { Rating } from '@rating/entity/rating.entity';
 
 export interface RatingService {

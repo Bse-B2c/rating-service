@@ -1,8 +1,9 @@
 import { RatingService as Service } from '@rating/interfaces/ratingService.interface';
-import { RatingDto } from '@rating/dtos/rating.dtos';
+import { RatingDto } from '@src/rating/dtos/rating.dto';
 import { Rating } from '@rating/entity/rating.entity';
 import { Repository } from 'typeorm';
 import { HttpException, HttpStatusCode } from '@bse-b2c/common';
+import { UpdateRatingDto } from './dtos/updateRating.dto';
 
 export class RatingService implements Service {
 	constructor(private repository: Repository<Rating>) {}
@@ -55,4 +56,13 @@ export class RatingService implements Service {
 
 		return rating;
 	};
+
+	update = async (
+		id: number,
+		updateRating: UpdateRatingDto
+	): Promise<Rating> => {
+		const rating = await this.findOne(id);
+
+		Object.assign(rating, updateRating);
+		return this.repository.save(rating);
 }

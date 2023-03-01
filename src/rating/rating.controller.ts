@@ -1,4 +1,4 @@
-import { RatingDto } from '@rating/dtos/rating.dtos';
+import { RatingDto } from '@src/rating/dtos/rating.dto';
 import { Request, Response, NextFunction } from 'express';
 import { HttpStatusCode } from '@bse-b2c/common';
 import { RatingService } from '@rating/interfaces/ratingService.interface';
@@ -51,6 +51,25 @@ export class RatingController {
 			const { id } = req.params;
 
 			const response = await this.service.delete(+id);
+
+			return res.status(HttpStatusCode.OK).send({
+				statusCode: HttpStatusCode.OK,
+				error: null,
+				data: response,
+			});
+		} catch (e) {
+			next(e);
+		}
+	};
+
+	update = async (req: Request, res: Response, next: NextFunction) => {
+		try {
+			const {
+				body,
+				params: { id },
+			} = req;
+
+			const response = await this.service.update(+id, body);
 
 			return res.status(HttpStatusCode.OK).send({
 				statusCode: HttpStatusCode.OK,
