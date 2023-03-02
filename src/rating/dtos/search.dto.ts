@@ -1,12 +1,10 @@
 import { Transform } from 'class-transformer';
 import { formatQueryToArray } from '@src/common/utils/query.utils';
-import { SortEnum } from '@src/common/enums/sort.enum';
 import {
 	IsISO8601,
 	IsString,
 	IsNumber,
 	IsOptional,
-	IsEnum,
 	IsIn,
 } from 'class-validator';
 
@@ -46,9 +44,9 @@ export class SearchDto {
 	@IsISO8601()
 	purchaseDate?: string;
 
-	@IsEnum(SortEnum)
+	@IsIn(['DESC', 'ASC'])
 	@IsOptional()
-	sortOrder: SortEnum;
+	sortOrder: number;
 
 	@IsString()
 	@IsIn(['ratingScale', 'date'])
