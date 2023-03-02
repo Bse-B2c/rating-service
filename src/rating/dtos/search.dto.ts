@@ -9,7 +9,6 @@ import {
 	IsEnum,
 	IsIn,
 } from 'class-validator';
-import e from 'express';
 
 export class SearchDto {
 	@IsOptional()
@@ -49,7 +48,7 @@ export class SearchDto {
 
 	@IsEnum(SortEnum)
 	@IsOptional()
-	sortOrder?: SortEnum;
+	sortOrder: SortEnum;
 
 	@IsString()
 	@IsIn(['ratingScale', 'date'])

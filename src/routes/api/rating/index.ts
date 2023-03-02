@@ -19,7 +19,7 @@ const validateQuery = validate('query');
 
 router.post('/', validateBody(RatingDto), ratingController.create);
 router.get('/:id', validateParams(ParamsDto), ratingController.findOne);
-//router.get('/', validateQuery(SearchDto), ratingController.find);
+router.get('/', validateQuery(SearchDto), ratingController.find);
 router.delete('/:id', validateParams(ParamsDto), ratingController.delete);
 router.patch(
 	'/:id',
