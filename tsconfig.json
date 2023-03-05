@@ -19,7 +19,8 @@
 			"@src/*": ["./*"],
 			"@middleware/*": ["./middleware/*"],
 			"@common/*": ["./common/*"],
-			"@rating/*": ["./rating/*"]
+			"@rating/*": ["./rating/*"],
+			"@stats/*": ["./stats/*"]
 		}
 	},
 	"include": ["./**/*.ts"]
