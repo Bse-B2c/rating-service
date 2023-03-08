@@ -26,6 +26,7 @@ export const validate =
 	(target: Target = 'body') =>
 	(objDTO: ClassConstructor<any>) =>
 	async (req: Request, res: Response, next: NextFunction) => {
+		console.log(req.body);
 		try {
 			if (req[target]) {
 				const dto = plainToInstance(objDTO, req[target]);

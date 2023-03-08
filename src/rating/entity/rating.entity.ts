@@ -11,7 +11,7 @@ export class Rating {
 	@Column()
 	comment: string;
 
-	@Column()
+	@Column({ default: new Date() })
 	date: Date;
 
 	@Column()

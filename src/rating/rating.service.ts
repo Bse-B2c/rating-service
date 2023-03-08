@@ -20,7 +20,6 @@ export class RatingService implements Service {
 	create = async ({
 		ratingScale,
 		comment,
-		date,
 		authorId,
 		productId,
 		purchaseDate,
@@ -37,7 +36,6 @@ export class RatingService implements Service {
 		const newRating = this.repository.create({
 			ratingScale,
 			comment,
-			date,
 			authorId,
 			productId,
 			purchaseDate,
@@ -70,6 +68,20 @@ export class RatingService implements Service {
 			throw new HttpException({
 				statusCode: HttpStatusCode.NOT_FOUND,
 				message: `Rating ${id} not found`,
+			});
+
+		return rating;
+	};
+
+	findByProduct = async (productId: number): Promise<Array<Rating>> => {
+		const rating = await this.repository.find({
+			where: { productId },
+		});
+
+		if (!rating)
+			throw new HttpException({
+				statusCode: HttpStatusCode.NOT_FOUND,
+				message: 'Rating not found',
 			});
 
 		return rating;

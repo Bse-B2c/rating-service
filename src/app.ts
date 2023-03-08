@@ -5,6 +5,8 @@ import { errorHandler } from '@bse-b2c/common';
 
 const app = express();
 
+appMiddleware(app);
+
 app.use(router);
 app.use(errorHandler);
 

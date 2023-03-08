@@ -1,3 +1,7 @@
 export interface StatsService {
-	average(productId: number): Promise<number>;
+	getAverage(productId: number): Promise<number>;
+	getPercentage(productId: number): Promise<{
+		total: number;
+		percentages: Array<{ scale: number; percentage: number }>;
+	}>;
 }

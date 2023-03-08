@@ -16,10 +16,6 @@ export class RatingDto {
 	comment: string;
 
 	@IsNotEmpty()
-	@IsISO8601()
-	date: Date;
-
-	@IsNotEmpty()
 	@IsNumber()
 	authorId: number;
 

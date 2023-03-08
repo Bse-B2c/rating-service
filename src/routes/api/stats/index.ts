@@ -15,7 +15,12 @@ const validateParams = validate('params');
 router.get(
 	'/:id/scale/average',
 	validateParams(ParamsDto),
-	statsController.average
+	statsController.getAverage
+);
+router.get(
+	'/:id/scale/percentage',
+	validateParams(ParamsDto),
+	statsController.getPercentage
 );
 
 export default router;

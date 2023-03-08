@@ -9,13 +9,12 @@ export class RatingController {
 
 	create = async (req: Request, res: Response, next: NextFunction) => {
 		try {
-			const { ratingScale, comment, date, authorId, productId, purchaseDate } =
+			const { ratingScale, comment, authorId, productId, purchaseDate } =
 				req.body as RatingDto;
 
 			const response = await this.service.create({
 				ratingScale,
 				comment,
-				date,
 				authorId,
 				productId,
 				purchaseDate,
@@ -58,6 +57,12 @@ export class RatingController {
 				sortOrder: sortOrder ?? 'DESC',
 				limit: limit || 10,
 				page: page || 0,
+			});
+
+			return res.status(HttpStatusCode.OK).send({
+				statusCode: HttpStatusCode.OK,
+				error: null,
+				data: response,
 			});
 		} catch (e) {
 			next(e);

@@ -17,7 +17,7 @@ export class Server {
 		try {
 			const PORT = process.env['PORT'] ?? 4500;
 
-			this.app.listen(PORT, () => console.log('Listening in ${PORT}'));
+			this.app.listen(PORT, () => console.log(`Listening in ${PORT}`));
 
 			this.db.connect();
 		} catch ({ message }) {
