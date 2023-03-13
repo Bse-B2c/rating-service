@@ -46,7 +46,7 @@ export class SearchDto {
 
 	@IsIn(['DESC', 'ASC'])
 	@IsOptional()
-	sortOrder: number;
+	sortOrder: string;
 
 	@IsString()
 	@IsIn(['ratingScale', 'date'])
