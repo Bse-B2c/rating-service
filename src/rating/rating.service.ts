@@ -11,7 +11,7 @@ import {
 	MoreThanOrEqual,
 } from 'typeorm';
 import { HttpException, HttpStatusCode } from '@bse-b2c/common';
-import { UpdateRatingDto } from './dtos/updateRating.dto';
+import { UpdateRatingDto } from '@rating/dtos/updateRating.dto';
 import { SearchDto } from '@rating/dtos/search.dto';
 
 export class RatingService implements Service {
