@@ -11,7 +11,7 @@ export class StatsController {
 			return res.status(HttpStatusCode.OK).send({
 				statusCode: HttpStatusCode.OK,
 				error: null,
-				data: { averageRating },
+				data: averageRating,
 			});
 		} catch (e) {
 			next(e);
@@ -25,7 +25,7 @@ export class StatsController {
 			return res.status(HttpStatusCode.OK).send({
 				statusCode: HttpStatusCode.OK,
 				error: null,
-				data: { percentageRating },
+				data: percentageRating,
 			});
 		} catch (e) {
 			next(e);
