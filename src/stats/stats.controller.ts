@@ -1,6 +1,7 @@
 import { Request, Response, NextFunction } from 'express';
 import { StatsService } from '@src/stats/stats.service';
 import { HttpStatusCode } from '@bse-b2c/common';
+import { ProductIdsDto } from '@stats/dtos/ProductIds.dto';
 
 export class StatsController {
 	constructor(private service: StatsService) {}
@@ -12,6 +13,26 @@ export class StatsController {
 				statusCode: HttpStatusCode.OK,
 				error: null,
 				data: averageRating,
+			});
+		} catch (e) {
+			next(e);
+		}
+	};
+
+	getProductsAverage = async (
+		req: Request,
+		res: Response,
+		next: NextFunction
+	) => {
+		try {
+			const { productIds } = req.query as ProductIdsDto;
+
+			const response = await this.service.getProductsAverage(productIds || []);
+
+			return res.status(HttpStatusCode.OK).send({
+				statusCode: HttpStatusCode.OK,
+				error: null,
+				data: response,
 			});
 		} catch (e) {
 			next(e);
