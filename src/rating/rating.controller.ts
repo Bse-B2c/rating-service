@@ -9,8 +9,14 @@ export class RatingController {
 
 	create = async (req: Request, res: Response, next: NextFunction) => {
 		try {
-			const { ratingScale, comment, authorId, productId, purchaseDate } =
-				req.body as RatingDto;
+			const {
+				ratingScale,
+				comment,
+				authorId,
+				authorName,
+				productId,
+				purchaseDate,
+			} = req.body as RatingDto;
 
 			const response = await this.service.create({
 				ratingScale,
@@ -18,6 +24,7 @@ export class RatingController {
 				authorId,
 				productId,
 				purchaseDate,
+				authorName,
 			});
 
 			return res.status(HttpStatusCode.CREATED).send({

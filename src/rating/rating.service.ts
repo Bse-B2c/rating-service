@@ -23,6 +23,7 @@ export class RatingService implements Service {
 		authorId,
 		productId,
 		purchaseDate,
+		authorName,
 	}: RatingDto): Promise<Rating> => {
 		const rating = await this.repository.findOne({
 			where: { authorId, productId },
@@ -39,6 +40,7 @@ export class RatingService implements Service {
 			authorId,
 			productId,
 			purchaseDate,
+			authorName,
 		});
 
 		return this.repository.save(newRating);

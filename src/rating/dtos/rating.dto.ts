@@ -19,6 +19,10 @@ export class RatingDto {
 	@IsNumber()
 	authorId: number;
 
+	@IsOptional()
+	@IsString()
+	authorName: string;
+
 	@IsNotEmpty()
 	@IsNumber()
 	productId: number;

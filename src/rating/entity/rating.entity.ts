@@ -18,6 +18,9 @@ export class Rating {
 	authorId: number;
 
 	@Column()
+	authorName: string;
+
+	@Column()
 	productId: number;
 
 	@Column()
