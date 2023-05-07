@@ -36,9 +36,13 @@ export class SearchDto {
 	authorId?: number;
 
 	@IsOptional()
-	@IsNumber()
-	@Transform(({ value }) => +value)
-	productId?: number;
+	@IsNumber({}, { each: true })
+	@Transform(({ value }) => {
+		if (value) return formatQueryToArray(value).map((e: string) => +e);
+
+		return undefined;
+	})
+	productId?: Array<number>;
 
 	@IsOptional()
 	@IsISO8601()

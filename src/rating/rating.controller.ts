@@ -53,6 +53,31 @@ export class RatingController {
 		}
 	};
 
+	findMyRating = async (req: Request, res: Response, next: NextFunction) => {
+		try {
+			const { orderBy, sortOrder, limit, page, ...search } =
+				req.query as unknown as SearchDto;
+			const userId = req.user ? req.user.id : -1;
+
+			const response = await this.service.find({
+				...search,
+				orderBy: orderBy ?? 'ratingScale',
+				authorId: userId,
+				sortOrder: sortOrder ?? 'DESC',
+				limit: limit || 10,
+				page: page || 0,
+			});
+
+			return res.status(HttpStatusCode.OK).send({
+				statusCode: HttpStatusCode.OK,
+				error: null,
+				data: response,
+			});
+		} catch (e) {
+			next(e);
+		}
+	};
+
 	find = async (req: Request, res: Response, next: NextFunction) => {
 		try {
 			const { orderBy, sortOrder, limit, page, ...search } =
@@ -95,11 +120,15 @@ export class RatingController {
 	update = async (req: Request, res: Response, next: NextFunction) => {
 		try {
 			const {
-				body: { ratingScale, comment },
+				body: { ratingScale, comment, authorName },
 				params: { id },
 			} = req;
 
-			const response = await this.service.update(+id, { ratingScale, comment });
+			const response = await this.service.update(+id, {
+				ratingScale,
+				comment,
+				authorName,
+			});
 
 			return res.status(HttpStatusCode.OK).send({
 				statusCode: HttpStatusCode.OK,

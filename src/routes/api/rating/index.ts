@@ -11,12 +11,24 @@ import { RatingDto } from '@src/rating/dtos/rating.dto';
 import { ParamsDto } from '@src/common/dtos/params.dto';
 import { SearchDto } from '@src/rating/dtos/search.dto';
 import { UpdateRatingDto } from '@src/rating/dtos/updateRating.dto';
+import {
+	ensureAuthenticated,
+	verifyRoles,
+} from '@middleware/ensureAuthenticated';
+import { Role } from '@common/enums/role.enum';
 
 // validate
 const validateBody = validate('body');
 const validateParams = validate('params');
 const validateQuery = validate('query');
 
+router.get(
+	'/me',
+	ensureAuthenticated,
+	verifyRoles([Role.CONSUMER, Role.ADMIN]),
+	validateQuery(SearchDto),
+	ratingController.findMyRating
+);
 router.post('/', validateBody(RatingDto), ratingController.create);
 router.get('/:id', validateParams(ParamsDto), ratingController.findOne);
 router.get('/', validateQuery(SearchDto), ratingController.find);

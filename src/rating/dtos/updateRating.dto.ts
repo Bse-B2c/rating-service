@@ -8,4 +8,8 @@ export class UpdateRatingDto {
 	@IsOptional()
 	@IsString()
 	comment: string;
+
+	@IsOptional()
+	@IsString()
+	authorName: string;
 }

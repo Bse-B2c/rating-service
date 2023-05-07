@@ -53,9 +53,9 @@ export class RatingService implements Service {
 		const rating = await this.findOne(id);
 
 		Object.assign(rating, {
-			date: new Date(),
 			comment: updateRating.comment !== undefined ? updateRating.comment : '',
 			ratingScale: updateRating.ratingScale,
+			authorName: updateRating.authorName,
 		});
 
 		return this.repository.save(rating);
@@ -115,7 +115,7 @@ export class RatingService implements Service {
 
 		if (authorId) where = { ...where, authorId: Equal(authorId) };
 
-		if (productId) where = { ...where, productId: Equal(productId) };
+		if (productId) where = { ...where, productId: In(productId) };
 
 		if (purchaseDate)
 			where = {
