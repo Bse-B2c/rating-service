@@ -29,12 +29,32 @@ router.get(
 	validateQuery(SearchDto),
 	ratingController.findMyRating
 );
-router.post('/', validateBody(RatingDto), ratingController.create);
-router.get('/:id', validateParams(ParamsDto), ratingController.findOne);
+router.post(
+	'/',
+	ensureAuthenticated,
+	verifyRoles([Role.CONSUMER, Role.ADMIN]),
+	validateBody(RatingDto),
+	ratingController.create
+);
+router.get(
+	'/:id',
+	ensureAuthenticated,
+	verifyRoles([Role.CONSUMER, Role.ADMIN]),
+	validateParams(ParamsDto),
+	ratingController.findOne
+);
 router.get('/', validateQuery(SearchDto), ratingController.find);
-router.delete('/:id', validateParams(ParamsDto), ratingController.delete);
+router.delete(
+	'/:id',
+	ensureAuthenticated,
+	verifyRoles([Role.CONSUMER, Role.ADMIN]),
+	validateParams(ParamsDto),
+	ratingController.delete
+);
 router.patch(
 	'/:id',
+	ensureAuthenticated,
+	verifyRoles([Role.CONSUMER, Role.ADMIN]),
 	validateParams(ParamsDto),
 	validateBody(UpdateRatingDto),
 	ratingController.update
